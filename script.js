@@ -1,57 +1,51 @@
-//console.log(cualEsMayor(1,2,3))
-
-//function cualEsMayor(n1, n2, n3){
-   // if (n1>=n2 && n1>=n3){
-   //     return(n1)
-    //}
-    
-    //if (n3>=n2 && n3>=n1){
-    //    return(n3)
-    //}
-    
-    //if (n2>=n1 && n2>=n3){
-    //    return(n2)
-    //}
-    
-
-//}
-const CALCULAR = document.getElementById('calcular');
-const ERROR = document.getElementById('error');
-const FLU = document.getElementById('flu');
-const MAN = document.getElementById('man');
+const CALCULAR = document.getElementById('calcular')
+const ERROR = document.getElementById('error')
+const FLU = document.getElementById('flu')
+const FLUJO = document.getElementById("flujo")
+const MAN = document.getElementById('man')
 
 CALCULAR.addEventListener('click', () => {
     const DATO = document.getElementById('peso').value
-    //validamos que se cargue un dato:
-    if (DATO > 0){
+    console.log("Dato ingresado: ", DATO)
+    if (DATO > 0 && DATO <= 30){
         ERROR.style.display = 'none'
-        let flujo = calcFlujo(DATO);
-        let mantenimiento = flujo*1.5;
-        FLU.innerHTML = flujo + ' cc/hr';
-        MAN.innerHTML = 'm+m/2 ' + mantenimiento + ' cc/hr';
-        FLU.style.display = 'block';
-        MAN.style.display = 'block';
-    } else {
-        ERROR.style.display = 'block';
-        FLU.style.display = 'none';
-        MAN.style.display = 'none';
+        let flujo = calcFlujo(DATO)
+        let mantenimiento = flujo*1.5
+        FLU.innerHTML = flujo[0] + ' cc'
+        FLUJO.innerHTML = flujo[1] + ' cc/hr'
+        MAN.innerHTML = 'm+m/2 ' + flujo[2] + ' cc/hr'
+        FLU.style.display = 'block'
+        FLUJO.style.display = 'block'
+        MAN.style.display = 'block'
+    } else if (DATO>30){
+        let sc = superficieCorporal(DATO)
+        FLU.innerHTML = sc[0] + ' cc/hr'
+        MAN.innerHTML = sc[1] + ' cc/hr'
+        FLU.style.display = 'block'
+        FLUJO.style.display = 'none'
+        MAN.style.display = 'block'
+    }  
+     else {
+        ERROR.style.display = 'block'
+        FLU.style.display = 'none'
+        MAN.style.display = 'none'
     }
 })
 function calcFlujo(peso){
-    let resto = peso;
-    let flujo = 0;
-    if (resto>20){
-        let aux = resto-20;
-        flujo += aux*1;
-        resto -= aux;
-    } 
-    if (resto>10){
-        let aux = resto-10;
-        flujo += aux*2;
-        resto -= aux;
+    let flujo = 0
+    if (peso>=10) {
+        flujo = peso *100
+    } else if( peso>10 && peso<=20) {
+        flujo = 1000 + ((peso-10)*50)
+    } else{
+        flujo = 1500 + ((peso-20)*20)
     }
-    flujo += resto*4;
-    return flujo;
+    return [flujo.toFixed(2),(flujo/24).toFixed(2),((flujo/24)*1.5).toFixed(2)]
+}
+
+function supeficieCorporal(peso){
+    let supeficieCorporal = ((peso * 4) + 7) / (peso + 90)
+    return [(supeficieCorporal * 1500).toFixed(2),(supeficieCorporal * 2000).toFixed(2)]
 }
 
 
