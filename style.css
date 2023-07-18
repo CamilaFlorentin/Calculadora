@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 body{
-        background: #f6f5f7; 
+        background: linear-gradient(180deg, #57C601 0%, #320049 100%), linear-gradient(121.28deg, #007762 0%, #5200FF 100%), linear-gradient(341.1deg, #FF0000 7.52%, #1700A4 77.98%), radial-gradient(49.82% 80.51% at 49.82% 50%, #820097 0%, #FF3D00 100%), radial-gradient(50% 72.12% at 50% 50%, #EB00FF 0%, #0B0037 100%);
+        background-blend-mode: color-dodge, overlay, difference, difference, normal;
         font-family: 'Montserrat', sans-serif;
         color: rgb(216, 167, 107);
 }
@@ -9,7 +10,6 @@ body{
 #bigcontenedor{
     width: 900px;
     height: 500px;
-    background-image: radial-gradient(circle at -19.64% 62.28%, #ff65b3 0, #ff59c0 10%, #ff4ecd 20%, #ff45d9 30%, #ff3fe6 40%, #f23cf2 50%, #d33ffe 60%, #ad46ff 70%, #7b4fff 80%, #0058ff 90%, #0060ff 100%);
     text-align: center;
     position: absolute;
     margin: auto;
